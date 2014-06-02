@@ -113,6 +113,7 @@
             android:exported="true"
             android:permission="com.cyanogenmod.lockclock.permission.READ_WEATHER">
             <intent-filter>
+                <action android:name="com.cyanogenmod.lockclock.action.FORCE_WEATHER_UPDATE" />
                 <action android:name="com.cyanogenmod.lockclock.action.REQUEST_WEATHER_UPDATE" />
             </intent-filter>
         </reciever>

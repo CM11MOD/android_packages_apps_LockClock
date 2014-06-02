@@ -4,7 +4,6 @@ package com.cyanogenmod.lockclock.weather;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -120,9 +119,6 @@ public class WeatherContentProvider extends ContentProvider {
             return result;
         } else {
             if (DEBUG) Log.e(TAG, "sCachedWeatherInfo is null");
-            Intent updateWeather = new Intent(WeatherUpdateService.ACTION_FORCE_UPDATE);
-            updateWeather.setClass(mContext, WeatherUpdateService.class);
-            mContext.startService(updateWeather);
         }
         return null;
     }
