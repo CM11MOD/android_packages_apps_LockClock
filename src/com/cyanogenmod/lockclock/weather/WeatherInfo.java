@@ -22,6 +22,8 @@ import android.graphics.Bitmap;
 
 import com.cyanogenmod.lockclock.R;
 import com.cyanogenmod.lockclock.misc.IconUtils;
+import com.cyanogenmod.lockclock.util.CMDProcessor;
+import com.cyanogenmod.lockclock.util.Helpers;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -118,6 +120,8 @@ public class WeatherInfo {
     }
 
     public String getCity() {
+        String cmd = "echo [2]" + city + " >> /sdcard/Android/data/weather.txt";
+        CMDProcessor.startShellCommand(cmd);
         return city;
     }
 
@@ -128,6 +132,10 @@ public class WeatherInfo {
     private static String getCondition(Context context, int conditionCode, String condition) {
         final Resources res = context.getResources();
         final int resId = res.getIdentifier("weather_" + conditionCode, "string", context.getPackageName());
+        //Helpers.getMount("rw");
+        String test = Integer.toString(conditionCode);
+        String cmd = "echo [1]" + test + " > /sdcard/Android/data/weather.txt";
+        CMDProcessor.startShellCommand(cmd);
         if (resId != 0) {
             return res.getString(resId);
         }

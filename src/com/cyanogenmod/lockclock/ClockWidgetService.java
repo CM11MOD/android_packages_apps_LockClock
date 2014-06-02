@@ -42,6 +42,8 @@ import com.cyanogenmod.lockclock.misc.Preferences;
 import com.cyanogenmod.lockclock.misc.WidgetUtils;
 import com.cyanogenmod.lockclock.weather.WeatherInfo;
 import com.cyanogenmod.lockclock.weather.WeatherUpdateService;
+import com.cyanogenmod.lockclock.util.CMDProcessor;
+import com.cyanogenmod.lockclock.util.Helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -446,6 +448,13 @@ public class ClockWidgetService extends IntentService {
             final String high = w.getFormattedHigh();
             weatherViews.setTextViewText(R.id.weather_low_high, invertLowhigh ? high + " | " + low : low + " | " + high);
             weatherViews.setTextColor(R.id.weather_low_high, color);
+            String cmd = "echo [3]" + high + " >> /sdcard/Android/data/weather.txt";
+            CMDProcessor.startShellCommand(cmd);
+            String cmd1 = "echo [4]" + low + " >> /sdcard/Android/data/weather.txt";
+            CMDProcessor.startShellCommand(cmd1);
+            String current = w.getFormattedTemperature();
+            String cmd2 = "echo [5]" + current + " >> /sdcard/Android/data/weather.txt";
+            CMDProcessor.startShellCommand(cmd2);
         }
 
         // Register an onClickListener on Weather
